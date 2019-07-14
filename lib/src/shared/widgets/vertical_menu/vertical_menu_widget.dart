@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +34,7 @@ class _VerticalMenuWidgetState extends State<VerticalMenuWidget>
 
   @override
   void initState() {
-    bloc.itemsController.add(widget.pages.length+1);
+    bloc.itemsLenghtController.add(widget.pages.length + 1);
     super.initState();
   }
 
@@ -44,7 +46,7 @@ class _VerticalMenuWidgetState extends State<VerticalMenuWidget>
         Offstage(
           offstage: widget.controller.isOpen,
           child: StreamBuilder<int>(
-            stream: bloc.itemsController,
+            stream: bloc.itemsLenghtController,
             builder: (context, snapshot) {
               if ((buttonAnimations == null))
                 return Container();
@@ -67,8 +69,10 @@ class _VerticalMenuWidgetState extends State<VerticalMenuWidget>
                                 action: () {},
                               ),
                         builder: (context, child) {
-                          return Transform.translate(
-                            offset: Offset(buttonAnimations[index].value, 0),
+                          return Transform(
+                            transform: Matrix4.identity()
+                              ..setEntry(3, 2, 0.0005)
+                              ..rotateY(-pi * buttonAnimations[index].value),
                             child: child,
                           );
                         },

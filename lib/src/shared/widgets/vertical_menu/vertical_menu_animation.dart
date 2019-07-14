@@ -19,19 +19,22 @@ mixin VerticalMenuAnimation<T extends StatefulWidget>
       duration: Duration(milliseconds: 1000),
     );
 
-    bloc.itemsController.listen((lenght) {
+    bloc.itemsLenghtController.listen((lenght) {
       buttonAnimations = List.generate(
         lenght,
         (index) {
+          var startAnimation = index / lenght;
+          var endAnimation = (index + 1) / lenght + (1 / lenght * 2);
+          endAnimation = endAnimation > 1 ?1 : endAnimation;
           return Tween<double>(
-            begin: -MediaQuery.of(context).size.height / (lenght-1),
+            begin: 1,
             end: 0,
           ).animate(
             CurvedAnimation(
               parent: controller.animation,
               curve: Interval(
-                index / lenght,
-                (index + 1) / lenght,
+                startAnimation,
+                endAnimation,
               ),
             ),
           );

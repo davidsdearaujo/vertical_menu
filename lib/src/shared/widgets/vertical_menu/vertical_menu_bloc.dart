@@ -4,12 +4,12 @@ import 'package:rxdart/rxdart.dart';
 import 'vertical_menu_model.dart';
 
 class VerticalMenuBloc extends BlocBase {
-  var itemsController = BehaviorSubject<int>();
+  var itemsLenghtController = BehaviorSubject<int>();
 
   //dispose will be called automatically by closing its streams
   @override
   void dispose() {
-    itemsController.close();
+    itemsLenghtController.close();
     super.dispose();
   }
 }
