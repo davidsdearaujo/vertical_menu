@@ -4,10 +4,8 @@ class VerticalMenuController{
   AnimationController animation;
 
   void toggle() {
-    if (animation?.value == 0)
-      animation?.forward();
-    else
-      animation?.reverse();
+    open();
+    close();
   }
 
   void open() {
@@ -17,6 +15,8 @@ class VerticalMenuController{
   void close(){
     if (animation?.value == 1) animation?.reverse();
   }
+
+  bool get isOpen => (animation?.value == 1) ?? false;
 
   void dispose(){
     animation.dispose();

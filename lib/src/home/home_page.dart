@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../shared/widgets/vertical_menu/vertical_menu_widget.dart';
@@ -9,9 +8,24 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  VerticalMenuController drawerController;
+
+  @override
+  void initState() {
+    super.initState();
+    drawerController = VerticalMenuController();
+  }
+
+  @override
+  void dispose() {
+    drawerController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return VerticalMenuWidget(
+      controller: drawerController,
       child: Scaffold(
         appBar: AppBar(
           title: Text("Home"),
